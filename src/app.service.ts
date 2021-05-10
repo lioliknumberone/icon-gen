@@ -76,4 +76,17 @@ export class AppService {
 			fs.unlinkSync(p);
 		}
 	}
+
+	getCache(): Array<string> {
+		
+		let contents = new Array<string>();
+
+		let files = fs.readdirSync(this.fullPath);
+		for (let i = 0; i < files.length; i++) {;
+			const url = path.join(this.dirName, files[i]);
+			contents.push(url)
+		}
+		
+		return contents;
+	}
 }
