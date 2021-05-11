@@ -53,4 +53,15 @@ export class AppController {
 
 		throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
 	}
+
+	@Get("app")
+	getInfo() {
+		
+		let info:any = {};
+		info.name = "icon-gen";
+		info.date = new Date();
+		info.cache = this.appService.getCache();
+
+		return info;
+	}
 }
