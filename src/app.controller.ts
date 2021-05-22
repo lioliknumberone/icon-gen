@@ -32,12 +32,16 @@ export class AppController {
 	}
 
 	@Post("icons")
-	async icons(@Body() body): Promise<string[]> {
+	async icons(@Query() query:Object, @Body() body): Promise<string[]> {
+
+		let sizeValue = body['size'] ?? query['size']
+		let timeValue =  body['time'] ?? query['time']
+		let durationValue = body['duration'] ?? query['duration']
 		
-		if (body['size'] && body['time'] && body['duration']) {
-			const size = Number(body['size']);
-			const datetime = Moment(body['time'], 'HH:mm:ss');
-			const duration =  Number(body['duration']);
+		if (sizeValue && timeValue && durationValue) {
+			const size = Number(sizeValue);
+			const datetime = Moment(timeValue, 'HH:mm:ss');
+			const duration =  Number(durationValue);
 
 			if (size != NaN && datetime.hour() != NaN && duration != NaN && (duration > 0 && duration <= 60)) {
 				let icons = new Array<string>();
